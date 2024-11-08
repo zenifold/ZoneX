@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { 
   HomeIcon,
   Dumbbell,
+  BarChart2,
+  ClockIcon,
   BookOpenIcon,
   Settings 
 } from 'lucide-react'
@@ -20,6 +22,16 @@ export default function Navigation() {
       name: 'Workout', 
       href: '/select-location', 
       icon: Dumbbell 
+    },
+    { 
+      name: 'Progress', 
+      href: '/progress',
+      icon: BarChart2
+    },
+    { 
+      name: 'History', 
+      href: '/history',
+      icon: ClockIcon
     },
     { 
       name: 'Exercise Library', 
