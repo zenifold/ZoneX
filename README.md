@@ -1,7 +1,5 @@
 # ZoneX - Unleash Your Fitness Potential
 
-![ZoneX Banner](https://via.placeholder.com/1200x400)
-
 ZoneX is an all-in-one fitness companion that will transform your workout routine and help you achieve your health and wellness goals. Whether you're a gym-goer, a home fitness enthusiast, or someone who loves to stay active on the go, ZoneX has got you covered.
 
 ## Features
