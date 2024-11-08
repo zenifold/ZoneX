@@ -19,8 +19,8 @@ function WorkoutSelection() {
       id: 'arms',
       name: 'Arms & Upper Body',
       icon: Dumbbell,
-      color: 'bg-rose-50 hover:bg-rose-100 border-rose-200',
-      iconColor: 'text-rose-600',
+      color: 'bg-rose-50 dark:bg-rose-900/20 hover:bg-rose-100 dark:hover:bg-rose-900/30 border-rose-200 dark:border-rose-800',
+      iconColor: 'text-rose-600 dark:text-rose-400',
       duration: '45-60 min',
       difficulty: 'Intermediate',
       calories: '300-400',
@@ -30,8 +30,8 @@ function WorkoutSelection() {
       id: 'abs',
       name: 'Core & Abs',
       icon: Activity,
-      color: 'bg-amber-50 hover:bg-amber-100 border-amber-200',
-      iconColor: 'text-amber-600',
+      color: 'bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30 border-amber-200 dark:border-amber-800',
+      iconColor: 'text-amber-600 dark:text-amber-400',
       duration: '30-40 min',
       difficulty: 'Intermediate',
       calories: '200-300',
@@ -41,8 +41,8 @@ function WorkoutSelection() {
       id: 'legs',
       name: 'Legs & Lower Body',
       icon: Timer,
-      color: 'bg-blue-50 hover:bg-blue-100 border-blue-200',
-      iconColor: 'text-blue-600',
+      color: 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-blue-200 dark:border-blue-800',
+      iconColor: 'text-blue-600 dark:text-blue-400',
       duration: '50-60 min',
       difficulty: 'Advanced',
       calories: '400-500',
@@ -52,8 +52,8 @@ function WorkoutSelection() {
       id: 'hiit',
       name: 'HIIT Workout',
       icon: Zap,
-      color: 'bg-purple-50 hover:bg-purple-100 border-purple-200',
-      iconColor: 'text-purple-600',
+      color: 'bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 border-purple-200 dark:border-purple-800',
+      iconColor: 'text-purple-600 dark:text-purple-400',
       duration: '20-30 min',
       difficulty: 'Advanced',
       calories: '250-350',
@@ -63,8 +63,8 @@ function WorkoutSelection() {
       id: 'cardio',
       name: 'Cardio Blast',
       icon: Flame,
-      color: 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200',
-      iconColor: 'text-emerald-600',
+      color: 'bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800',
+      iconColor: 'text-emerald-600 dark:text-emerald-400',
       duration: '30-45 min',
       difficulty: 'Beginner',
       calories: '200-300',
@@ -124,16 +124,16 @@ function WorkoutSelection() {
 
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   <div className="flex items-center space-x-1">
-                    <Clock className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{details.duration}</span>
+                    <Clock className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">{details.duration}</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <Activity className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{details.difficulty}</span>
+                    <Activity className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">{details.difficulty}</span>
                   </div>
                   <div className="flex items-center space-x-1">
-                    <Flame className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{details.calories}</span>
+                    <Flame className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">{details.calories}</span>
                   </div>
                 </div>
 

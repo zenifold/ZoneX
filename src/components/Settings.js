@@ -12,7 +12,9 @@ import {
   Volume2,
   Ruler,
   LogOut,
-  Edit
+  Edit,
+  Check,
+  X
 } from 'lucide-react';
 
 function Settings({ darkMode, toggleDarkMode }) {
@@ -46,7 +48,14 @@ function Settings({ darkMode, toggleDarkMode }) {
   };
 
   const handleNameSave = () => {
-    localStorage.setItem('userName', userName);
+    if (userName.trim()) {
+      localStorage.setItem('userName', userName);
+      setIsEditingName(false);
+    }
+  };
+
+  const handleNameCancel = () => {
+    setUserName(localStorage.getItem('userName') || '');
     setIsEditingName(false);
   };
 
@@ -61,27 +70,59 @@ function Settings({ darkMode, toggleDarkMode }) {
           control: (
             <div className="flex items-center">
               {isEditingName ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                   <input
                     type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="px-3 py-1 border rounded-md dark:bg-gray-700 dark:border-gray-600"
+                    className="w-full sm:w-auto px-3 py-1.5 border rounded-lg 
+                             dark:bg-gray-700 dark:border-gray-600 
+                             focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
+                             focus:border-transparent outline-none
+                             text-gray-900 dark:text-white
+                             placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="Enter your name"
+                    autoFocus
                   />
-                  <button
-                    onClick={handleNameSave}
-                    className="px-3 py-1 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                  >
-                    Save
-                  </button>
+                  <div className="flex gap-2 w-full sm:w-auto">
+                    <button
+                      onClick={handleNameSave}
+                      disabled={!userName.trim()}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center
+                               px-3 py-1.5 text-sm font-medium
+                               bg-blue-500 text-white rounded-lg
+                               hover:bg-blue-600 
+                               disabled:opacity-50 disabled:cursor-not-allowed
+                               transition-colors duration-200"
+                    >
+                      <Check className="w-4 h-4 mr-1" />
+                      Save
+                    </button>
+                    <button
+                      onClick={handleNameCancel}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center
+                               px-3 py-1.5 text-sm font-medium
+                               bg-gray-200 dark:bg-gray-600 
+                               text-gray-700 dark:text-gray-200 rounded-lg
+                               hover:bg-gray-300 dark:hover:bg-gray-500
+                               transition-colors duration-200"
+                    >
+                      <X className="w-4 h-4 mr-1" />
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="flex items-center space-x-2">
-                  <span className="text-gray-700 dark:text-gray-300">{userName || 'Not set'}</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {userName || 'Not set'}
+                  </span>
                   <button
                     onClick={() => setIsEditingName(true)}
-                    className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="p-1 text-gray-500 hover:text-gray-700 
+                             dark:text-gray-400 dark:hover:text-gray-200
+                             transition-colors duration-200"
+                    aria-label="Edit name"
                   >
                     <Edit className="w-4 h-4" />
                   </button>
@@ -195,7 +236,7 @@ function Settings({ darkMode, toggleDarkMode }) {
               {group.settings.map((setting, settingIndex) => (
                 <div
                   key={settingIndex}
-                  className="flex items-center justify-between py-3"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between py-3 gap-4"
                 >
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
@@ -210,7 +251,7 @@ function Settings({ darkMode, toggleDarkMode }) {
                       </p>
                     </div>
                   </div>
-                  <div className="ml-4">
+                  <div className="ml-0 sm:ml-4">
                     {setting.control}
                   </div>
                 </div>

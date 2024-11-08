@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
@@ -13,7 +13,8 @@ import ProgressDashboard from './components/ProgressDashboard';
 import Achievements from './components/Achievements';
 import ExerciseLibrary from './components/ExerciseLibrary';
 import Settings from './components/Settings';
-import { Bell, Moon, Sun } from 'lucide-react';
+import ScrollToTop from './components/ScrollToTop';
+import { BookOpenText, Settings as SettingsIcon, Moon, Sun } from 'lucide-react';
 
 const workoutPrograms = {
   arms: {
@@ -175,6 +176,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className={`min-h-screen bg-gray-50 dark:bg-gray-900 ${darkMode ? 'dark' : ''}`}>
         {user && (
           <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -186,11 +188,18 @@ function App() {
                   </h1>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <button 
+                  <Link 
+                    to="/exercise-library"
                     className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
-                    <Bell className="w-5 h-5" />
-                  </button>
+                    <BookOpenText className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    to="/settings"
+                    className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <SettingsIcon className="w-5 h-5" />
+                  </Link>
                   <button
                     onClick={toggleDarkMode}
                     className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

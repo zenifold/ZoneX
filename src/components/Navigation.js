@@ -5,8 +5,7 @@ import {
   Dumbbell,
   BarChart2,
   ClockIcon,
-  BookOpenIcon,
-  Settings 
+  Trophy
 } from 'lucide-react'
 
 export default function Navigation() {
@@ -16,33 +15,33 @@ export default function Navigation() {
     { 
       name: 'Home', 
       href: '/', 
-      icon: HomeIcon 
+      icon: HomeIcon,
+      isActiveCheck: (path) => path === '/'
     },
     { 
       name: 'Workout', 
       href: '/select-location', 
-      icon: Dumbbell 
+      icon: Dumbbell,
+      isActiveCheck: (path) => path.includes('/select-location') || path.includes('/workout') || path.includes('/quick-pump')
     },
     { 
       name: 'Progress', 
       href: '/progress',
-      icon: BarChart2
+      icon: BarChart2,
+      isActiveCheck: (path) => path === '/progress'
     },
     { 
       name: 'History', 
       href: '/history',
-      icon: ClockIcon
+      icon: ClockIcon,
+      isActiveCheck: (path) => path === '/history'
     },
     { 
-      name: 'Exercise Library', 
-      href: '/exercise-library', 
-      icon: BookOpenIcon 
-    },
-    { 
-      name: 'Settings', 
-      href: '/settings', 
-      icon: Settings 
-    },
+      name: 'Achievements', 
+      href: '/achievements', 
+      icon: Trophy,
+      isActiveCheck: (path) => path === '/achievements'
+    }
   ]
 
   return (
@@ -50,7 +49,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           {navigation.map((item) => {
-            const isActive = location.pathname === item.href
+            const isActive = item.isActiveCheck(location.pathname)
             return (
               <Link
                 key={item.name}

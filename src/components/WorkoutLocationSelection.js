@@ -9,24 +9,24 @@ function WorkoutLocationSelection() {
       name: 'At the Gym',
       description: 'Access to full equipment for strength and cardio training',
       icon: Building2,
-      color: 'bg-sky-50 hover:bg-sky-100 border-sky-200',
-      iconColor: 'text-sky-600'
+      color: 'bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 border-sky-200 dark:border-sky-800',
+      iconColor: 'text-sky-600 dark:text-sky-400'
     },
     { 
       id: 'home', 
       name: 'At Home',
       description: 'Workouts optimized for minimal or no equipment',
       icon: Home,
-      color: 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200',
-      iconColor: 'text-emerald-600'
+      color: 'bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800',
+      iconColor: 'text-emerald-600 dark:text-emerald-400'
     },
     { 
       id: 'anywhere', 
       name: 'On the Go',
       description: 'Quick workouts you can do anywhere, anytime',
       icon: Globe,
-      color: 'bg-purple-50 hover:bg-purple-100 border-purple-200',
-      iconColor: 'text-purple-600',
+      color: 'bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 border-purple-200 dark:border-purple-800',
+      iconColor: 'text-purple-600 dark:text-purple-400',
       route: '/quick-pump' // Special route for "anywhere" option
     }
   ];

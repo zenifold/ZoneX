@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Exercise from './Exercise';
+import ExerciseLibrary from './ExerciseLibrary';
 import { saveWorkout } from '../utils/db';
-import { ArrowLeft, Play, Clock, Dumbbell, Calendar } from 'lucide-react';
+import { ArrowLeft, Play, Clock, Dumbbell, Calendar, Plus } from 'lucide-react';
 
 function WorkoutDetail({ workoutPrograms, onFinish }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const workout = workoutPrograms[id];
+  const [showExerciseLibrary, setShowExerciseLibrary] = useState(false);
   
   const [exerciseData, setExerciseData] = useState(
     workout ? workout.exercises.reduce((data, exercise) => {
@@ -17,6 +19,8 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
       return data;
     }, {}) : {}
   );
+
+  const [exercises, setExercises] = useState(workout ? workout.exercises : []);
 
   if (!workout) {
     return (
@@ -60,7 +64,7 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
       id: workout.id,
       name: workout.name,
       date: new Date().toISOString(),
-      exercises: workout.exercises.map(exercise => ({
+      exercises: exercises.map(exercise => ({
         name: exercise.name,
         sets: exerciseData[exercise.name].sets
       }))
@@ -70,6 +74,17 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
       onFinish(finishedWorkout);
       navigate('/history');
     });
+  };
+
+  const handleAddExercise = (exercise) => {
+    setExercises([...exercises, exercise]);
+    setExerciseData({
+      ...exerciseData,
+      [exercise.name]: {
+        sets: new Array(4).fill({ weight: '', reps: '', rest: '', completed: false })
+      }
+    });
+    setShowExerciseLibrary(false);
   };
 
   const isWorkoutComplete = () => {
@@ -94,7 +109,7 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
               </div>
               <div className="flex items-center">
                 <Dumbbell className="w-4 h-4 mr-1" />
-                <span className="text-sm">{workout.exercises.length} exercises</span>
+                <span className="text-sm">{exercises.length} exercises</span>
               </div>
               <div className="flex items-center">
                 <Calendar className="w-4 h-4 mr-1" />
@@ -113,7 +128,7 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
 
       {/* Exercises */}
       <div className="space-y-6">
-        {workout.exercises.map((exercise) => (
+        {exercises.map((exercise) => (
           <Exercise
             key={exercise.name}
             exercise={exercise}
@@ -125,21 +140,56 @@ function WorkoutDetail({ workoutPrograms, onFinish }) {
         ))}
       </div>
 
-      {/* Complete Workout Button */}
-      <div className="mt-8 flex justify-end">
+      {/* Action Buttons */}
+      <div className="mt-8 flex flex-col md:flex-row justify-end items-stretch md:items-center space-y-3 md:space-y-0 md:space-x-3">
+        <button
+          onClick={() => setShowExerciseLibrary(true)}
+          className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-white font-medium text-sm
+            bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700
+            transform transition-all duration-200 ease-in-out hover:scale-105 shadow-md hover:shadow-lg
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 w-full md:w-auto"
+        >
+          <Plus className="w-4 h-4 mr-1.5" />
+          Add Exercise
+        </button>
         <button
           onClick={handleFinishWorkout}
           disabled={!isWorkoutComplete()}
-          className={`inline-flex items-center px-6 py-3 rounded-lg text-white font-semibold
+          className={`inline-flex items-center justify-center px-4 py-2 rounded-lg text-white font-medium text-sm
+            transform transition-all duration-200 ease-in-out hover:scale-105 shadow-md hover:shadow-lg
+            focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 w-full md:w-auto
             ${isWorkoutComplete()
-              ? 'bg-emerald-500 hover:bg-emerald-600'
+              ? 'bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700'
               : 'bg-gray-300 cursor-not-allowed'
-            } transition-colors`}
+            }`}
         >
-          <Play className="w-5 h-5 mr-2" />
+          <Play className="w-4 h-4 mr-1.5" />
           Complete Workout
         </button>
       </div>
+
+      {/* Exercise Library Modal */}
+      {showExerciseLibrary && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                Add Exercise from Library
+              </h2>
+              <button
+                onClick={() => setShowExerciseLibrary(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+            </div>
+            <ExerciseLibrary 
+              onSelectExercise={handleAddExercise}
+              isSelectionMode={true}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
