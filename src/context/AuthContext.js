@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser(session.user)
+        console.log('User logged in:', session.user); // Log user info
         // Fetch profile and stats when user is authenticated
         try {
           const [userProfile, stats] = await Promise.all([
@@ -36,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null)
         setProfile(null)
         setUserStats(null)
+        console.log('User logged out'); // Log user logout
       }
       setLoading(false)
     })
@@ -49,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const user = await getCurrentUser()
       setUser(user)
+      console.log('Current user:', user); // Log current user info
       if (user) {
         // Fetch profile and stats when checking initial user
         const [userProfile, stats] = await Promise.all([
