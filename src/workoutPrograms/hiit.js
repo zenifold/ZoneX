@@ -7,7 +7,7 @@ const hiitProgram = {
   duration: '30-45 min',
   difficulty: 'Advanced',
   calories: '500-700',
-  description: 'Intense full-body workout combining cardio and strength exercises with short, high-intensity intervals',
+  description: 'Intense full-body workout combining cardio and strength exercises with short, high-intensity intervals. Always begin with a 5-10 minute dynamic warm-up and conclude with a 5-minute cool-down to prevent injury and support recovery.',
   exercises: [
     {
       name: 'Burpees',
